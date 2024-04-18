@@ -1,0 +1,33 @@
+name: "publish npm"
+
+on: 
+  push:
+    branches: [main]
+jobs:
+    publish:
+        runs-on: ubuntu-latest
+        steps:
+            - name: checkout
+              uses: actions/checkout@v2
+            - name: node
+              uses: actions/setup-node@v2
+              with:
+                  node-version: 20
+                  registry-url: https://registry.npmjs.org
+            - name : "install_dependencies"
+              run: npm install
+              working-directory: ./
+            - name : "check build"
+              run: npm pack --dry-run
+              working-directory: ./
+            - name : "versioning"
+              run: npm version patch
+              working-directory: ./
+            - name : "build"
+              run: npm run build
+              working-directory: ./
+            - name : "publish" 
+              run: npm publish --access public
+              working-directory: ./
+              env:
+                  NODE_AUTH_TOKEN: ${{secrets.NPM_TEST}}
