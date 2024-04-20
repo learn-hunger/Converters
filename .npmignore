@@ -2,3 +2,8 @@ src
 publish
 node_modules
 example
+test
+docs
+publish
+__snapshot__
+.github
