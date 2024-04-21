@@ -60,7 +60,7 @@ jobs:
                 tag_name: ${{ steps.versioning.outputs.version }}
                 files: |
                   ${{env.release_path}}index.js 
-                  ${{env.release_path}}index.d.ts               
+                  ${{env.release_path}}index.js.map             
               
               env:
                   GITHUB_TOKEN: ${{ secrets.PAT }}
