@@ -11,7 +11,7 @@ reset_color='\033[0m'
 
 branch_pattern="^(feature|bugfix|hotfix|release|maintenance|experiment|doc|refactor|integration|personal)/.*|^(main|master|develop|stage|prod)$"
 branch_name="$(git branch --show-current)"
-branch_error_msg="${red}* branch name invalid$reset_color"
+branch_error_msg="${red}* invalid branch name$reset_color"
 branch_name_syntax="${blue}* syntax : <define>/<extra details>\n* only supports branch name with pattern: \n ${branch_pattern}$reset_color"
 branch_name_placeholder="${blue}* example feature/pp-120/adding-logo$reset_color"
 branch_name_suggestion="${blue}* suggestion rename using command git branch -m 'feature/pp-140/logo-integration'$reset_color"
