@@ -14,7 +14,7 @@ branch_name="$(git branch --show-current)"
 branch_error_msg="${red}* branch name invalid$reset_color"
 branch_name_syntax="${blue}* syntax : <define>/<extra details>\n* only supports branch name with pattern: \n ${branch_pattern}$reset_color"
 branch_name_placeholder="${blue}* example feature/pp-120/adding-logo$reset_color"
-branch_name_suggestion="${blue}* suggestion rename using command git branch -m 'new branch name'$reset_color"
+branch_name_suggestion="${blue}* suggestion rename using command git branch -m 'feature/pp-140/logo-integration'$reset_color"
 branch_name_success="$green branch name check succeded$reset_color"
 if [[ ! $branch_name =~ $branch_pattern ]]; then
     echo -e "$branch_error_msg"
