@@ -19,8 +19,8 @@ commit_name_success="$green* commit message check succeded$reset_color"
 if [[ ! $commit_msg =~ $commit_pattern ]]; then
     echo -e "$commit_error_msg"
     echo -e "$commit_name_syntax"
-    echo -e "$commit_name_suggestion"
     echo -e "$commit_name_placeholder"
+    echo -e "$commit_name_suggestion"
     exit 1
 else
     echo -e "$commit_name_success"
