@@ -1,0 +1,30 @@
+#!/bin/bash
+echo "checking commit msg..."
+commit_msg_file=$1
+commit_msg=$(cat "$commit_msg_file")
+
+red='\033[0;31m X '
+blue='\033[0;34m ! '
+green='\033[0;32m ✔ '
+reset_color='\033[0m'
+
+# Define the regex pattern for valid commit message prefixes
+commit_pattern="^(feat|fix|docs|chore|refactor):"
+commit_error_msg="${red}* commit prefix name invalid$reset_color"
+commit_name_syntax="$blue* syntax : <define>:<extra details>\n\t only supports commit msg with pattern: \n \t${commit_pattern}$reset_color"
+commit_name_placeholder="$blue* example of branch name : feature/pp-120/one$reset_color"
+commit_name_suggestion="$blue* suggestion renaming branch : git commit -m 'new commit name'$reset_color"
+commit_name_success="$green* commit message check succeded$reset_color"
+# Check if the commit message matches the regex pattern
+if [[ ! $commit_msg =~ $commit_pattern ]]; then
+    echo -e "$commit_error_msg"
+    echo -e "$commit_name_syntax"
+    echo -e "$commit_name_suggestion"
+    echo -e "$commit_name_placeholder"
+    exit 1
+else
+    echo -e "$commit_name_success"
+fi
+
+exit 0
+

@@ -1,33 +1,64 @@
-name: "publish npm"
+name: "CI/CD NPM"
 
 on: 
+  pull_request:
+    branches: [main]
   push:
     branches: [main]
+permissions:
+  contents: write
+  pull-requests: write
 jobs:
     publish:
         runs-on: ubuntu-latest
+        env:
+          main_source_path: "./"
+          release_path: "dist/"
+          sample: "2"
         steps:
             - name: checkout
-              uses: actions/checkout@v2
+              uses: actions/checkout@v3
             - name: node
-              uses: actions/setup-node@v2
+              uses: actions/setup-node@v3.8.1
               with:
                   node-version: 20
                   registry-url: https://registry.npmjs.org
+            - name : "configuring git"
+              run: |
+                git config --global user.email "${{github.actor}}@users.noreply.github.com"
+                git config --global user.name "${{github.actor}}"
             - name : "install_dependencies"
               run: npm install
-              working-directory: ./
+              working-directory: ${{env.main_source_path}}
             - name : "check build"
               run: npm pack --dry-run
-              working-directory: ./
+              working-directory: ${{env.main_source_path}}
             - name : "versioning"
-              run: npm version patch
-              working-directory: ./
+              id: versioning
+              run: |
+                # based on repo
+                # repository="${{github.repository}}"                
+                # IFS='/' read -ra parts <<< "${repository}"
+                # latest_version=$(npm view "${parts[1]}" version) 
+                package_name=$(node -e "console.log(require('./package.json').name)")
+                latest_version=$(npm view "${package_name}" version) 
+                echo "::set-output name=version::${latest_version}"
+                npm version "$latest_version" --no-git-tag-version
+                npm version patch --no-git-tag-version
+              working-directory: ${{env.main_source_path}}
             - name : "build"
               run: npm run build
-              working-directory: ./
+              working-directory: ${{env.main_source_path}}
             - name : "publish" 
               run: npm publish --access public
-              working-directory: ./
+              working-directory: ${{env.main_source_path}}
               env:
-                  NODE_AUTH_TOKEN: ${{secrets.NPM_TEST}}
+                  NODE_AUTH_TOKEN: ${{secrets.NPM_PVSCREATIONS}}
+            - name: Release
+              uses: softprops/action-gh-release@v2
+              with:
+                tag_name: ${{ steps.versioning.outputs.version }}
+                files: |
+                  ${{env.release_path}}.gitkeep                
+              env:
+                  GITHUB_TOKEN: ${{ secrets.PAT }}
