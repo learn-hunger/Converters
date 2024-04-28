@@ -1,4 +1,4 @@
-enum Xnum1{
+enum Enum1{
     hello
 }
 enum Enum2{
