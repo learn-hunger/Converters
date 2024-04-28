@@ -38,7 +38,7 @@ export enum EErrorTypes {
     VALUE_ERROR = "Value Name Invalid "
 }
 
-export const EInfoTypes: { [k in TChecks]: string } = {
+export const C_INFO_TYPES: { [k in TChecks]: string } = {
     ENUM_IDENTIFIER: "Enum Should Start With Capital Letter E ",
     TYPE_IDENTIFER: "Type Should Start With Capital Letter T ",
     INTERFACE_IDENTIFIER: "Interface Should Start With Capital Letter I ",
@@ -48,7 +48,7 @@ export const EInfoTypes: { [k in TChecks]: string } = {
     CONST_IDENTIFIER: "Const SHOULD follow SCREAMING_SNAKE_Case and starting with Capital letter C "
 }
 
-export const ESyntaxTypes: { [key in TChecks]: string } = {
+export const C_SYNTAX_TYPES: { [key in TChecks]: string } = {
     ENUM_IDENTIFIER: `<E><Prefix><Suffix>`,
     TYPE_IDENTIFER: "<T><Prefix><Suffix>",
     INTERFACE_IDENTIFIER: "<I><Prefix><Suffix>",
@@ -58,12 +58,12 @@ export const ESyntaxTypes: { [key in TChecks]: string } = {
     CONST_IDENTIFIER: "<C><_><Prefix><_><Suffix>"
 }
 
-export const ESuggestionTypes: { [key in TChecks]: string } = {
+export const C_SUGGESTION_TYPES: { [key in TChecks]: string } = {
     ENUM_IDENTIFIER: "example: enum ELearnHunger {};",
     TYPE_IDENTIFER: "example: type TLearnHunger {};",
     INTERFACE_IDENTIFIER: "example interface ILearnHunger {}",
     ABSTRACT_IDENTIFIER: "example abstract ALearnHunger {}",
     CLASS_IDENTIFIER: "example class LearnHunger {}",
     NAMESPACE_IDENTIFER: "example namespace NLearnHunger {}",
-    CONST_IDENTIFIER: "example const N_LEARN_Hunger {}"
+    CONST_IDENTIFIER: "example const C_LEARN_Hunger {}"
 }

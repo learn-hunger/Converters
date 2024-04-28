@@ -1,7 +1,7 @@
 import ts from "typescript";
 import { ErrorExist } from "../constants/checks";
-import { EColorCodes, EErrorTypes, EInfoTypes, EMessages, EOtherVariables, ESuggestionTypes, ESymbols, ESyntaxTypes } from "../constants/error-prompts";
-import { CCheckRegex } from "../constants/regex";
+import { C_INFO_TYPES, EColorCodes, EErrorTypes, EMessages, EOtherVariables, C_SUGGESTION_TYPES, ESymbols, C_SYNTAX_TYPES } from "../constants/error-prompts";
+import { C_CHECK_REGEX } from "../constants/regex";
 import { TChecks, TErrorTypes } from "../types/types";
 
 export function reportBlock(sourceFile: ts.SourceFile, node: ts.Node, errorMessage: TErrorTypes, check: TChecks): void {
@@ -24,15 +24,15 @@ function reportError(sourceFile: ts.SourceFile, node: ts.Node, errorMessage: TEr
 }
 
 function reportInfo(infoMessage: TChecks): string {
-    const message = `${EMessages.INFO} ${EInfoTypes[infoMessage]} `
+    const message = `${EMessages.INFO} ${C_INFO_TYPES[infoMessage]} `
     return message;
 }
 
 function reportSyntax(syntaxMessage:TChecks):string {
-    const message=`${EMessages.INFO} ${EOtherVariables.SYNTAX} ${ESyntaxTypes[syntaxMessage]}\n\tPattern is: ${CCheckRegex[syntaxMessage]}`
+    const message=`${EMessages.INFO} ${EOtherVariables.SYNTAX} ${C_SYNTAX_TYPES[syntaxMessage]}\n\tPattern is: ${C_CHECK_REGEX[syntaxMessage]}`
     return message
  }
 function reportSuggestion(syntaxMessage:TChecks):string {
-    const message=`${EMessages.SUGGESTION} ${ESuggestionTypes[syntaxMessage]}`;
+    const message=`${EMessages.SUGGESTION} ${C_SUGGESTION_TYPES[syntaxMessage]}`;
     return message;
  }

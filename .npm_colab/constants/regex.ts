@@ -1,5 +1,5 @@
 import { TChecks } from "../types/types";
-export const CCheckRegex: { [key in TChecks]: RegExp } = {
+export const C_CHECK_REGEX: { [key in TChecks]: RegExp } = {
     ENUM_IDENTIFIER: (/^E[A-Z]/),
     TYPE_IDENTIFER: (/^T[A-Z]/),
     INTERFACE_IDENTIFIER: (/^I[A-Z]/),

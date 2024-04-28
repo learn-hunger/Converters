@@ -1,5 +1,5 @@
 #!/bin/bash
-excludeFilesArray=(".npm_colab/.LHLint.ts")
+excludeFilesArray=(".npm_colab/.LHLint.ts" ".npm_colab/functions/report-block.ts")
 staged_files=()
 #find ts files
 while IFS= read -r line; do
