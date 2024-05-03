@@ -3,8 +3,8 @@ excludeFilesArray=(".npm_colab/.LHLint.ts" ".npm_colab/functions/report-block.ts
 staged_files=()
 #find ts files
 while IFS= read -r line; do
-    if [[ $line =~ ^[AM][[:space:]]+(.*)\.ts$ ]]; then
-        filename="${BASH_REMATCH[1]}.ts"  # Extracts the filename from the regex match
+    if [[ $line =~ ^[AM][[:space:]]+(.*\.(ts|tsx))$ ]]; then
+        filename="${BASH_REMATCH[1]}"  # Extracts the filename from the regex match
         staged_files+=("$filename")
     fi
 done < <(git status --porcelain)

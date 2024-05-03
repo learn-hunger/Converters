@@ -2,12 +2,16 @@
   "name": "test_token2",
   "version": "0.0.3",
   "description": "A package for visulisation ,especially for landmarks",
-  "main": "src/index.ts",
+  "private":true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc -p ./tsconfig.json",
+    "ts-build": "tsc -p ./tsconfig.json",
     "config": "git config core.hooksPath .githooks",
-    "linting": "ts-node ./.npm_colab/index.ts './.npm_colab/test.ts'"
+    "lhlint": "ts-node ./.npm_colab/index.ts './.npm_colab/test.ts'",
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
   },
   "repository": {
     "type": "git",
@@ -32,10 +36,21 @@
   "homepage": "https://github.com/pvscreations/npm#readme",
   "dependencies": {
     "fs": "^0.0.1-security",
-    "tsc-node": "^0.0.3"
+    "tsc-node": "^0.0.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@types/node": "^20.12.7",
-    "typescript": "^5.4.5"
+    "typescript": "^5.4.5",
+    "@types/react": "^18.2.66",
+    "@types/react-dom": "^18.2.22",
+    "@typescript-eslint/eslint-plugin": "^7.2.0",
+    "@typescript-eslint/parser": "^7.2.0",
+    "@vitejs/plugin-react-swc": "^3.5.0",
+    "eslint": "^8.57.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.6",
+    "vite": "^5.2.10"
   }
 }
