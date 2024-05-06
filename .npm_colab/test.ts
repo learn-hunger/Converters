@@ -16,4 +16,3 @@ abstract class ALearnHunger{
 export namespace NLearnHunger{}
 const C_LEARN_HUNGER="LEARN_HUNGER";
 
-
