@@ -7,5 +7,5 @@ export const LHLint: { [key in TChecks]: boolean } = {
     ABSTRACT_IDENTIFIER: true,
     CLASS_IDENTIFIER: true,
     NAMESPACE_IDENTIFER: true,
-    CONST_IDENTIFIER: true
+    CONST_IDENTIFIER: false
 }
