@@ -14,7 +14,7 @@
     "preview": "vite preview",
     "prettier-check": "npx prettier . --check",
     "prettier-write": "npx prettier . --write",
-    "pdf": "ts-node src/app/results/index.ts "
+    "pdf": "ts-node src/app/results/functions/manage-pdf-content.ts"
   },
   "repository": {
     "type": "git",
@@ -38,8 +38,7 @@
   },
   "homepage": "https://github.com/pvscreations/npm#readme",
   "dependencies": {
-    "fs": "^0.0.1-security",
-    "pdf-parse": "^1.1.1",
+    "pdfjs-dist": "^4.2.67",
     "prettier": "^3.2.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

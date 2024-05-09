@@ -1,12 +1,15 @@
-import { EGrades, branchRegex, gradesRegex, level1Regex, subjectCodeRegex, subjectCredits, subjectRegex, zeroCredits } from "../utils/results-constants";
-import { ISemSubjects, ISubject } from "../utils/results-types";
-import { ResultsStateManager } from "./blueprints/resultsStateManager";
-import { extractTextFromPDF } from "./functions/pdfextract";
+import { EGrades, branchRegex, gradesRegex, level1Regex, subjectCodeRegex, subjectCredits, subjectRegex, zeroCredits } from "../../utils/results-constants";
+import { ISemSubjects, ISubject } from "../../utils/results-types";
+import { ResultsStateManager } from "../blueprints/resultsStateManager";
+import { extractTextFromPDF } from "./pdfextract";
 
-const pdfFilePath = 'src/assets/Examination Cell _ RGUKT Nuzvid.pdf'; // Replace with your PDF file path
+// const pdfFilePath = 'src/assets/Examination Cell _ RGUKT Nuzvid.pdf'; // Replace with your PDF file path
 const resultsObject: ResultsStateManager = new ResultsStateManager();
-extractTextFromPDF(pdfFilePath)
+export function managePdfContent(pdfFilePath:string):void{
+    extractTextFromPDF(pdfFilePath)
     .then((text: string) => {
+        // console.log(text.match(level1Regex)![0],"hell")
+        
         const level1Text = text.match(level1Regex)![0].split("\n");
         let results: ISemSubjects = {};
         level1Text.forEach((i) => {
@@ -17,7 +20,7 @@ extractTextFromPDF(pdfFilePath)
                 year: level2Text.slice(0, 6),
                 branch: level2Text.match(branchRegex)![0],
                 subject: level2Text.match(subjectRegex)![0],
-                subjectCode: level2Text.slice(level2Text.length - 8, level2Text.length),
+                subjectCode: (level2Text.slice(level2Text.length - 10, level2Text.length)).replaceAll(/\s/g,''),
                 grade: grade as keyof typeof EGrades,
                 credits: null
             }
@@ -30,7 +33,10 @@ extractTextFromPDF(pdfFilePath)
             results[Object.keys(results).length] = eachSubjectRow;
         })
         resultsObject.addResult(results);
+        console.log(ResultsStateManager.result);
     })
     .catch(error => {
         console.error('Error:', error);
     });
+}
+//test
