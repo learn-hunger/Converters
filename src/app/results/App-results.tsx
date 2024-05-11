@@ -1,28 +1,76 @@
-import { useEffect, useState } from "react";
+import React, { useRef, useState } from "react";
+import { EErrorMessages, EOtherVariables } from "../utils/results-constants";
+import { ISemResult } from "../utils/results-types";
 import { ResultsStateManager } from "./blueprints/resultsStateManager";
+import FormTemplate from "./components/Form-template";
 import { managePdfContent } from "./functions/manage-pdf-content";
-const testData = {
-  url: "src/assets/Examination Cell _ RGUKT Nuzvid.pdf",
-};
-
 const AppResults = () => {
-  const [uploadState, setUploadState] = useState(1);
   const resultsObject: ResultsStateManager = new ResultsStateManager();
-  useEffect(() => {
-    console.log(uploadState);
+  const [allResults, setAllResults] = useState(ResultsStateManager.result);
+  const cgpa = useRef<HTMLDivElement>(null);
 
-    if (uploadState) {
-      managePdfContent(testData.url);
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (files && files?.length > 0) {
+      Object.keys(files).forEach(async (i: string, index: number) => {
+        const reader = new FileReader();
+
+        reader.readAsArrayBuffer(files[index]);
+        reader.onload = async (event) => {
+          const result = event.target?.result;
+          if (result && result instanceof ArrayBuffer) {
+            const typedarray = new Uint8Array(result);
+            try {
+              await managePdfContent(typedarray);
+            } catch (err) {
+              console.log(err);
+              window.alert(
+                `I think ${files[index].name} was not supported,Please Download it from rguktn site`,
+              );
+            }
+            setAllResults([...ResultsStateManager.result]);
+          }
+        };
+      });
     }
-    return;
-  }, [uploadState]);
+  };
   return (
     <>
-      <div className="container">
-        <div className="grid grid-cols-3 gap-4">
-          <div className="text-red-500">hell</div>
-          <div className="text-red">hell</div>
-          <div className="text-red">hell</div>
+      <div className="container relative m-auto">
+        <div className="p-10 m-auto">
+          <div>
+            <input
+              type="file"
+              accept=".pdf"
+              multiple
+              onChange={handleFileUpload}
+            />
+          </div>
+          <div>
+            CGPA:
+            <span ref={cgpa}>
+              {isNaN(resultsObject.getCgpa)
+                ? EErrorMessages.CGPA
+                : resultsObject.getCgpa.toFixed(EOtherVariables.CGPA_FIXED)}
+            </span>
+          </div>
+          {allResults.map((i: ISemResult, index) => {
+            return (
+              <div className="border border-black mb-4 ">
+                <div className="text-right text-xl pe-2">
+                  <button
+                    onClick={() => {
+                      resultsObject.removeSemResult(index);
+                      setAllResults([...ResultsStateManager.result]);
+                    }}
+                  >
+                    X
+                  </button>
+                </div>
+                <FormTemplate cgpaRef={cgpa} semIndex={index} data={i} />
+              </div>
+            );
+          })}
         </div>
       </div>
     </>
