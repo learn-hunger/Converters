@@ -10,8 +10,8 @@ export interface ISubject {
   year: string;
   branch: string;
   subject: string;
-  subjectCode: string;
-  grade: keyof typeof EGrades;
+  subjectCode: string | null;
+  grade: keyof typeof EGrades | null;
   credits: number | null;
 }
 

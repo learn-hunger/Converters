@@ -3,6 +3,7 @@ import { EErrorMessages, EOtherVariables } from "../utils/results-constants";
 import { ISemResult } from "../utils/results-types";
 import { ResultsStateManager } from "./blueprints/resultsStateManager";
 import FormTemplate from "./components/Form-template";
+import { manageImgContent } from "./functions/manage-img-content";
 import { managePdfContent } from "./functions/manage-pdf-content";
 const AppResults = () => {
   const resultsObject: ResultsStateManager = new ResultsStateManager();
@@ -13,24 +14,39 @@ const AppResults = () => {
     const files = e.target.files;
     if (files && files?.length > 0) {
       Object.keys(files).forEach(async (i: string, index: number) => {
-        const reader = new FileReader();
-
-        reader.readAsArrayBuffer(files[index]);
-        reader.onload = async (event) => {
-          const result = event.target?.result;
-          if (result && result instanceof ArrayBuffer) {
-            const typedarray = new Uint8Array(result);
-            try {
-              await managePdfContent(typedarray);
-            } catch (err) {
-              console.log(err);
-              window.alert(
-                `I think ${files[index].name} was not supported,Please Download it from rguktn site`,
-              );
+        const pdfProcessing = () => {
+          const reader = new FileReader();
+          reader.readAsArrayBuffer(files[index]);
+          reader.onload = async (event) => {
+            const result = event.target?.result;
+            if (result && result instanceof ArrayBuffer) {
+              const typedarray = new Uint8Array(result);
+              try {
+                await managePdfContent(typedarray);
+              } catch (err) {
+                console.log(err);
+                window.alert(
+                  `I think ${files[index].name} was not supported,Please Download it from rguktn site`,
+                );
+              }
+              setAllResults([...ResultsStateManager.result]);
             }
-            setAllResults([...ResultsStateManager.result]);
-          }
+          };
         };
+        const imageProcessing = async () => {
+          await manageImgContent(files[index]);
+          setAllResults([...ResultsStateManager.result]);
+        };
+        switch (files[index].type) {
+          case "application/pdf":
+            pdfProcessing();
+            break;
+          case "image/png":
+          case "image/jpg":
+          case "image/jpeg":
+            imageProcessing();
+            break;
+        }
       });
     }
   };
@@ -41,7 +57,7 @@ const AppResults = () => {
           <div>
             <input
               type="file"
-              accept=".pdf"
+              accept=".pdf,.png,.jpeg,.jpg"
               multiple
               onChange={handleFileUpload}
             />

@@ -35,22 +35,19 @@ export function managePdfContent(
           grade: grade as keyof typeof EGrades,
           credits: null,
         };
-        if (subjectCredits[eachSubjectRow.subjectCode]) {
-          eachSubjectRow.credits = subjectCredits[eachSubjectRow.subjectCode];
+        if (subjectCredits[eachSubjectRow.subjectCode as string]) {
+          eachSubjectRow.credits =
+            subjectCredits[eachSubjectRow.subjectCode as string];
         } else if (Object.keys(zeroCredits).includes(grade)) {
-          eachSubjectRow.credits = zeroCredits[eachSubjectRow.grade]!;
+          eachSubjectRow.credits = zeroCredits[eachSubjectRow.grade!]!;
         }
 
         results.push(eachSubjectRow);
       });
       resultsObject.addResult(results);
-
-      console.log(ResultsStateManager.result);
       return ResultsStateManager.result;
     })
     .catch((error) => {
       throw error;
-      console.error("Error:", error);
     });
 }
-//test

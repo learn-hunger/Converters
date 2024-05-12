@@ -1,9 +1,26 @@
+import { ISubject } from "./results-types";
+
 const gradesRegex = /(?<=(.*?))(Ex|A|B|C|D|P|WH|R|F|AB|MP)$/;
 const subjectCodeRegex = /(.*)(?=(Ex|A|B|C|D|P|WH|R|F|AB|MP)$)/;
 const branchRegex = /(CSE|ECE|EEE|MECH|CIVIL|CHEM)(?=(.*?))/;
 const subjectRegex = /(?<=(CSE|ECE|EEE|MECH|CIVIL|CHEM))(.*?)(?=(\d))/;
 const level1Regex = /(?<=Grade\n)[\s\S]*?(.*?)(?=\nP=PASS)/;
 
+const imgSubCodeRegx = /(\d{2}\w+\d{2})/;
+const imgCreditsRegex = /(?<=.+)(\d\.?\d?)/;
+const imgSubRegex = /((\w{3,}\s)+)/;
+const imgGradeRegex = /(Ex|A|B|C|D|P|WH|R|F|AB|MP|€|8|fri|E)(?=\s*$)/;
+
+export { imgCreditsRegex, imgGradeRegex, imgSubCodeRegx, imgSubRegex };
+
+export const imgSubRowDefaultValues: ISubject = {
+  year: "Engineering",
+  branch: "branch",
+  subject: "subject",
+  subjectCode: "subjectCode",
+  grade: null,
+  credits: null,
+};
 enum EGrades {
   Ex,
   A,
@@ -24,6 +41,7 @@ export enum EErrorMessages {
 export enum EOtherVariables {
   SGPA_FIXED = 2,
   CGPA_FIXED = 2,
+  IMG_ROW_MIN_LENGTH = 6,
 }
 
 //TODO DRY CODE NEEDED HERE
