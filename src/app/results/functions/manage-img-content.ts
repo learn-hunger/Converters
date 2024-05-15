@@ -12,7 +12,7 @@ import {
 } from "../../utils/results-constants";
 import { ISemResult, ISubject } from "../../utils/results-types";
 import { ResultsStateManager } from "../blueprints/resultsStateManager";
-import { extractTextFromImg } from "./img-extract";
+import { extractTextFromImg } from "../../shared/functions/img-extract";
 const resultsObject: ResultsStateManager = new ResultsStateManager();
 
 export function manageImgContent(
