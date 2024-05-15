@@ -1,6 +1,6 @@
 import React from "react";
-import { formClassNames } from "../../utils/results-constants";
-import { ISubject } from "../../utils/results-types";
+import { formClassNames } from "./../utils/results-constants";
+import { ISubject } from "../utils/results-types";
 
 const CreditModal: React.FC<{
   setCredit: (e: React.ChangeEvent<HTMLInputElement>) => void;

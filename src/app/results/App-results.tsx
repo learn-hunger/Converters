@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
-import { EErrorMessages, EOtherVariables } from "../utils/results-constants";
-import { ISemResult } from "../utils/results-types";
+import { EErrorMessages, EOtherVariables } from "./utils/results-constants";
+import { ISemResult } from "./utils/results-types";
 import { ResultsStateManager } from "./blueprints/resultsStateManager";
 import FormTemplate from "./components/Form-template";
 import { manageImgContent } from "./functions/manage-img-content";

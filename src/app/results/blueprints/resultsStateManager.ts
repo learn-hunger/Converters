@@ -1,5 +1,5 @@
-import { gradeMap } from "../../utils/results-constants";
-import { ISemResult, ISetCredits, ISubject } from "../../utils/results-types";
+import { gradeMap } from "./../utils/results-constants";
+import { ISemResult, ISetCredits, ISubject } from "../utils/results-types";
 
 export class ResultsStateManager {
   public static result: ISemResult[] = [];
@@ -17,7 +17,7 @@ export class ResultsStateManager {
     let sum = 0;
     let totalCredits = 0;
     result.forEach((i: ISubject) => {
-      sum += i.credits ? i.credits * gradeMap[i.grade] : 0;
+      sum += i.credits && i.grade ? i.credits * gradeMap[i.grade] : 0;
       totalCredits += i.credits ? i.credits * 10 : 0;
     });
     const sGpa = (sum / totalCredits) * 10;

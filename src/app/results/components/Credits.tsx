@@ -1,6 +1,6 @@
 import { RefObject, useState } from "react";
-import { EOtherVariables, formClassNames } from "../../utils/results-constants";
-import { ISubject } from "../../utils/results-types";
+import { EOtherVariables, formClassNames } from "./../utils/results-constants";
+import { ISubject } from "../utils/results-types";
 import { ResultsStateManager } from "../blueprints/resultsStateManager";
 import CreditModal from "./Credit-Modal";
 const resultObject = new ResultsStateManager();

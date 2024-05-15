@@ -7,10 +7,10 @@ import {
   subjectCredits,
   subjectRegex,
   zeroCredits,
-} from "../../utils/results-constants";
-import { ISemResult, ISubject } from "../../utils/results-types";
+} from "./../utils/results-constants";
+import { ISemResult, ISubject } from "../utils/results-types";
 import { ResultsStateManager } from "../blueprints/resultsStateManager";
-import { extractTextFromPDF } from "./pdfextract";
+import { extractTextFromPDF } from "../../shared/functions/pdfextract";
 
 // const pdfFilePath = 'src/assets/Examination Cell _ RGUKT Nuzvid.pdf'; // Replace with your PDF file path
 const resultsObject: ResultsStateManager = new ResultsStateManager();

@@ -1,6 +1,6 @@
 import { RefObject, useRef } from "react";
-import { EOtherVariables, formClassNames } from "../../utils/results-constants";
-import { ISemResult, ISubject } from "../../utils/results-types";
+import { EOtherVariables, formClassNames } from "./../utils/results-constants";
+import { ISemResult, ISubject } from "../utils/results-types";
 import { ResultsStateManager } from "../blueprints/resultsStateManager";
 import Credits from "./Credits";
 const FormTemplate: React.FC<{
