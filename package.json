@@ -15,7 +15,8 @@
     "prettier-check": "npx prettier . --check",
     "prettier-write": "npx prettier . --write",
     "pdf": "ts-node src/app/results/functions/manage-pdf-content.ts",
-    "image": "ts-node src/app/results/functions/manage-img-content.ts.ts"
+    "image": "ts-node src/app/results/functions/manage-img-content.ts.ts",
+    "serve": "npm run build && cd dist && http-server"
   },
   "repository": {
     "type": "git",
@@ -61,6 +62,7 @@
     "postcss": "^8.4.38",
     "tailwindcss": "^3.4.3",
     "typescript": "^5.4.5",
-    "vite": "^5.2.10"
+    "vite": "^5.2.10",
+    "vite-plugin-pwa": "^0.20.1"
   }
 }
