@@ -2,9 +2,9 @@ name: "CI/CD NPM"
 
 on:
   pull_request:
-    branches: [feature/service-workers]
+    branches: [master]
   push:
-    branches: [feature/service-workers]
+    branches: [master]
 permissions:
   contents: write
   pull-requests: write
@@ -78,10 +78,10 @@ jobs:
           vercel-project-id: ${{ secrets.PROJECT_ID}} #Required
           working-directory: ./dist
           alias-domains: | #Optional
-            myvercel-stage.vercel.app
+            converters-offline.vercel.app
 
   release:
-    # needs: [deploy-vercel]
+    needs: [deploy-vercel]
     runs-on: ubuntu-latest
     # env:
     #   main_source_path: "./"
