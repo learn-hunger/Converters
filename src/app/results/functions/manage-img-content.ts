@@ -13,6 +13,8 @@ import {
 import { ISemResult, ISubject } from "../utils/results-types";
 import { ResultsStateManager } from "../blueprints/resultsStateManager";
 import { extractTextFromImg } from "../../shared/functions/img-extract";
+import handleAnalytics from "../utils/analytics";
+import { analytics, EAnalytics } from "../utils/converters-constants";
 const resultsObject: ResultsStateManager = new ResultsStateManager();
 
 export function manageImgContent(
@@ -82,6 +84,7 @@ export function manageImgContent(
       }
     });
     resultsObject.addResult(results);
+    handleAnalytics(analytics[EAnalytics.GPA_IMAGE_SUCCESS]);
     return ResultsStateManager.result;
   });
 }

@@ -34,11 +34,10 @@ export async function extractTextFromPDF(
           return text;
         })
         .catch((error) => {
-          console.error("Error: " + error);
-          return error;
+          throw error;
         });
     })
     .catch((error) => {
-      console.error("Error: " + error);
+      throw error;
     });
 }

@@ -1,6 +1,11 @@
+import { extractTextFromPDF } from "../../shared/functions/pdfextract";
+import { ResultsStateManager } from "../blueprints/resultsStateManager";
+import handleAnalytics from "../utils/analytics";
+import { analytics, EAnalytics } from "../utils/converters-constants";
+import { ISemResult, ISubject } from "../utils/results-types";
 import {
-  EGrades,
   branchRegex,
+  EGrades,
   gradesRegex,
   level1Regex,
   subjectCodeRegex,
@@ -8,9 +13,6 @@ import {
   subjectRegex,
   zeroCredits,
 } from "./../utils/results-constants";
-import { ISemResult, ISubject } from "../utils/results-types";
-import { ResultsStateManager } from "../blueprints/resultsStateManager";
-import { extractTextFromPDF } from "../../shared/functions/pdfextract";
 
 // const pdfFilePath = 'src/assets/Examination Cell _ RGUKT Nuzvid.pdf'; // Replace with your PDF file path
 const resultsObject: ResultsStateManager = new ResultsStateManager();
@@ -45,9 +47,15 @@ export function managePdfContent(
         results.push(eachSubjectRow);
       });
       resultsObject.addResult(results);
+      handleAnalytics(analytics[EAnalytics.GPA_PDF_SUCCESS]);
       return ResultsStateManager.result;
     })
     .catch((error) => {
+      const pdfError = Object.assign({}, analytics[EAnalytics.GPA_PDF_ERROR]);
+      pdfError.data = error.stack;
+      handleAnalytics(pdfError);
+      analytics[EAnalytics.GPA_PDF_ERROR].data = "";
+
       throw error;
     });
 }

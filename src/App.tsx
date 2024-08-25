@@ -1,10 +1,16 @@
+import TagManager from "react-gtm-module";
 import "./App.css";
-import IndexResults from "./app/results/Index-results";
-
+import TabbedNav from "./Tabbed-nav";
 function App() {
-  // const [count, setCount] = useState(0)
+  const tagManagerArgs = {
+    gtmId: "GTM-K8F8DGJR",
+    dataLayer: {
+      event: "initialised",
+    },
+  };
 
-  return <IndexResults />;
+  TagManager.initialize(tagManagerArgs);
+  return <TabbedNav />;
 }
 
 export default App;
