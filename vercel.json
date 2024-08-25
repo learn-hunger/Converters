@@ -1,4 +1,10 @@
 {
+  "version": 2,
+  "public": false,
+  "github": {
+    "enabled": false
+  },
+  "builds": [{ "src": "./dist", "use": "@vercel/static" }],
   "headers": [
     {
       "source": "/(.*).html",

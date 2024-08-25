@@ -14,7 +14,7 @@ const AppResults = () => {
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (files && files?.length > 0) {
-      Object.keys(files).forEach(async (i: string, index: number) => {
+      Object.keys(files).forEach(async (_, index: number) => {
         const pdfProcessing = () => {
           const reader = new FileReader();
           reader.readAsArrayBuffer(files[index]);

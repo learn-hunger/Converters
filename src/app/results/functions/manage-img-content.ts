@@ -23,7 +23,7 @@ export function manageImgContent(
   return extractTextFromImg(imgFilePath).then((data: Page) => {
     //preprocessing
     const lines: string[] = [];
-    data.lines.forEach((i, index) => {
+    data.lines.forEach((i) => {
       i.text.replaceAll(/\s/g, "").length > EOtherVariables.IMG_ROW_MIN_LENGTH
         ? lines.push(i.text.replaceAll(/(\n|\|)/g, ""))
         : null;

@@ -35,7 +35,7 @@ const TabbedNav = () => {
             href="#"
             className="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300"
           >
-            Image/Pdf to Text
+            Image/Pdf To Text
           </a>
         </li>
         <li className="me-2">
@@ -47,7 +47,7 @@ const TabbedNav = () => {
             href="#"
             className="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300"
           >
-            RGUKT GPA
+            RGUKT GPA CALCULATE
           </a>
         </li>
       </ul>
